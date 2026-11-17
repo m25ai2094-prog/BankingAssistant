@@ -1,0 +1,1 @@
+# Standard-library-only cloud deployment; no third-party packages are required.\n# Optional Rasa and model-training dependencies are intentionally excluded.\n

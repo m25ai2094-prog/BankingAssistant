@@ -1,0 +1,3206 @@
+[
+  {
+    "name": "Browser assets and session",
+    "group": "Interface",
+    "status": "PASS",
+    "observed": "Dashboard, assistant assets and guest snapshot served with an HTTP-only session cookie.",
+    "timings": [],
+    "transcript": []
+  },
+  {
+    "name": "Verified balance from typed request",
+    "group": "Accounts",
+    "status": "PASS",
+    "observed": "Free-text request routed to verified balance and masked account.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 1.386
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.638
+      },
+      {
+        "event": "balance_complete",
+        "ms": 1.613
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "How much money is in my account",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "balance_complete",
+        "message": "Here are the balances for the verified demo account.",
+        "title": "Savings balance",
+        "rows": [
+          [
+            "Account",
+            "•••• 1001"
+          ],
+          [
+            "Ledger balance",
+            "₹1,25,000.00"
+          ],
+          [
+            "Available balance",
+            "₹1,25,000.00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Unknown identity and inbox isolation",
+    "group": "Verification",
+    "status": "PASS",
+    "observed": "Unknown and known IDs have identical prompts; delivery is session-scoped.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.929
+      },
+      {
+        "event": "invalid_identity",
+        "ms": 0.812
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.327
+      },
+      {
+        "event": "ask_identity",
+        "ms": 1.014
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.175
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Check balance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "invalid_identity",
+        "message": "Use a demo customer ID like DEMO1001 or the sample 10-digit mobile.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Wrong, malformed and consumed OTP",
+    "group": "Verification",
+    "status": "PASS",
+    "observed": "Invalid and wrong codes rejected; valid code consumed once.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.705
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.355
+      },
+      {
+        "event": "otp_format",
+        "ms": 1.084
+      },
+      {
+        "event": "otp_rejected",
+        "ms": 1.184
+      },
+      {
+        "event": "balance_complete",
+        "ms": 1.18
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Check balance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_format",
+        "message": "Enter exactly six digits.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_rejected",
+        "message": "Code rejected. Try the current six-digit demo code.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "balance_complete",
+        "message": "Here are the balances for the verified demo account.",
+        "title": "Savings balance",
+        "rows": [
+          [
+            "Account",
+            "•••• 1001"
+          ],
+          [
+            "Ledger balance",
+            "₹1,25,000.00"
+          ],
+          [
+            "Available balance",
+            "₹1,25,000.00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Three-attempt OTP lock",
+    "group": "Verification",
+    "status": "PASS",
+    "observed": "Three wrong attempts lock issuance in the same chat.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 1.083
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.623
+      },
+      {
+        "event": "otp_rejected",
+        "ms": 1.026
+      },
+      {
+        "event": "otp_rejected",
+        "ms": 1.078
+      },
+      {
+        "event": "otp_locked",
+        "ms": 1.101
+      },
+      {
+        "event": "ask_identity",
+        "ms": 0.742
+      },
+      {
+        "event": "otp_locked",
+        "ms": 1.508
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Check balance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_rejected",
+        "message": "Code rejected. Try the current six-digit demo code.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_rejected",
+        "message": "Code rejected. Try the current six-digit demo code.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_locked",
+        "message": "Too many attempts. Wait five minutes before verifying in this chat.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Check balance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_locked",
+        "message": "Verification is temporarily locked in this chat.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "OTP cooldown, expiry and resend",
+    "group": "Verification",
+    "status": "PASS",
+    "observed": "Controlled clock exercised resend cooldown and five-minute expiry.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.89
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.637
+      },
+      {
+        "event": "otp_cooldown",
+        "ms": 0.741
+      },
+      {
+        "event": "otp_expired",
+        "ms": 1.127
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.405
+      },
+      {
+        "event": "balance_complete",
+        "ms": 1.474
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Check balance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_cooldown",
+        "message": "Wait 15 seconds before requesting another code.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_expired",
+        "message": "Code expired. Request a new code.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "balance_complete",
+        "message": "Here are the balances for the verified demo account.",
+        "title": "Savings balance",
+        "rows": [
+          [
+            "Account",
+            "•••• 1001"
+          ],
+          [
+            "Ledger balance",
+            "₹1,25,000.00"
+          ],
+          [
+            "Available balance",
+            "₹1,25,000.00"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Rolling OTP issue limit",
+    "group": "Verification",
+    "status": "PASS",
+    "observed": "Fifth issuance within the rolling window rejected.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.763
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.453
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.076
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.035
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.012
+      },
+      {
+        "event": "otp_rate_limited",
+        "ms": 0.757
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Check balance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "otp_rate_limited",
+        "message": "The request limit was reached. Try again after five minutes.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Verification expiry before commit",
+    "group": "Verification",
+    "status": "PASS",
+    "observed": "Active review restored before expiry. Expired verification hid the profile and review and blocked the commit.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.797
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.374
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.565
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 0.965
+      },
+      {
+        "event": "ask_rail",
+        "ms": 1.155
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.834
+      },
+      {
+        "event": "review",
+        "ms": 0.728
+      },
+      {
+        "event": "awaiting_confirmation",
+        "ms": 1.008
+      },
+      {
+        "event": "verification_expired",
+        "ms": 0.794
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transfer money",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_payee",
+        "message": "Choose a registered demo beneficiary.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Meera Rao",
+        "event": "ask_transfer_amount",
+        "message": "Enter the transfer amount in rupees for Meera Rao, account ending 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "1500",
+        "event": "ask_rail",
+        "message": "Choose a simulated payment rail.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "IMPS",
+        "event": "ask_purpose",
+        "message": "Choose a payment purpose.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Personal",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review simulated transfer",
+        "rows": [
+          [
+            "Beneficiary",
+            "Meera Rao · •••• 2002"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ],
+          [
+            "Purpose",
+            "Personal"
+          ]
+        ]
+      },
+      {
+        "echo": "show details again",
+        "event": "awaiting_confirmation",
+        "message": "Choose Confirm or Cancel to resolve the draft.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Confirm",
+        "event": "verification_expired",
+        "message": "Verification expired. Verify the demo identity again to restart this draft.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Filtered transaction history",
+    "group": "Accounts",
+    "status": "PASS",
+    "observed": "Date, direction and minimum amount filters returned two owned rows.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.856
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.341
+      },
+      {
+        "event": "ask_range",
+        "ms": 1.924
+      },
+      {
+        "event": "ask_direction",
+        "ms": 1.032
+      },
+      {
+        "event": "ask_min_amount",
+        "ms": 0.726
+      },
+      {
+        "event": "history_complete",
+        "ms": 1.293
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transaction history",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_range",
+        "message": "Choose a history period.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "30 days",
+        "event": "ask_direction",
+        "message": "Filter by transaction direction.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Debit",
+        "event": "ask_min_amount",
+        "message": "Enter a minimum absolute amount in rupees or choose Any amount.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "1500",
+        "event": "history_complete",
+        "message": "Found 2 matching entries. The result is limited to the latest 12.",
+        "title": "Transaction history",
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Confirmed transfer reconciliation",
+    "group": "Transfers",
+    "status": "PASS",
+    "observed": "₹1,500 debit and credit reconciled with one saved transfer reference.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.705
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.615
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.628
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 1.257
+      },
+      {
+        "event": "ask_rail",
+        "ms": 1.024
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.876
+      },
+      {
+        "event": "review",
+        "ms": 0.688
+      },
+      {
+        "event": "transfer_complete",
+        "ms": 1.297
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transfer money",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_payee",
+        "message": "Choose a registered demo beneficiary.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Meera Rao",
+        "event": "ask_transfer_amount",
+        "message": "Enter the transfer amount in rupees for Meera Rao, account ending 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "1500",
+        "event": "ask_rail",
+        "message": "Choose a simulated payment rail.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "IMPS",
+        "event": "ask_purpose",
+        "message": "Choose a payment purpose.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Personal",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review simulated transfer",
+        "rows": [
+          [
+            "Beneficiary",
+            "Meera Rao · •••• 2002"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ],
+          [
+            "Purpose",
+            "Personal"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "transfer_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "TRF-B678C0D1A8",
+        "rows": [
+          [
+            "Status",
+            "Recorded in sandbox"
+          ],
+          [
+            "Beneficiary",
+            "Meera Rao"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cancelled transfer",
+    "group": "Transfers",
+    "status": "PASS",
+    "observed": "Cancellation left the opening balance and transfer table unchanged.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.89
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.499
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.687
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 1.022
+      },
+      {
+        "event": "ask_rail",
+        "ms": 1.065
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.816
+      },
+      {
+        "event": "review",
+        "ms": 1.258
+      },
+      {
+        "event": "cancelled",
+        "ms": 0.877
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transfer money",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_payee",
+        "message": "Choose a registered demo beneficiary.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Meera Rao",
+        "event": "ask_transfer_amount",
+        "message": "Enter the transfer amount in rupees for Meera Rao, account ending 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "1500",
+        "event": "ask_rail",
+        "message": "Choose a simulated payment rail.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "IMPS",
+        "event": "ask_purpose",
+        "message": "Choose a payment purpose.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Personal",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review simulated transfer",
+        "rows": [
+          [
+            "Beneficiary",
+            "Meera Rao · •••• 2002"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ],
+          [
+            "Purpose",
+            "Personal"
+          ]
+        ]
+      },
+      {
+        "echo": "Cancel",
+        "event": "cancelled",
+        "message": "Draft cancelled. Choose a service to continue.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Payee, amount and balance validation",
+    "group": "Transfers",
+    "status": "PASS",
+    "observed": "Unknown payee, invalid decimal amounts, cap and insufficient funds were rejected.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.996
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.569
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.564
+      },
+      {
+        "event": "invalid_field",
+        "ms": 1.05
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 0.972
+      },
+      {
+        "event": "invalid_field",
+        "ms": 0.764
+      },
+      {
+        "event": "invalid_field",
+        "ms": 0.809
+      },
+      {
+        "event": "invalid_field",
+        "ms": 0.848
+      },
+      {
+        "event": "invalid_field",
+        "ms": 0.768
+      },
+      {
+        "event": "invalid_field",
+        "ms": 0.98
+      },
+      {
+        "event": "invalid_field",
+        "ms": 0.974
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transfer money",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_payee",
+        "message": "Choose a registered demo beneficiary.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Unknown",
+        "event": "invalid_field",
+        "message": "Choose one of the options shown for this step.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Meera Rao",
+        "event": "ask_transfer_amount",
+        "message": "Enter the transfer amount in rupees for Meera Rao, account ending 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "0",
+        "event": "invalid_field",
+        "message": "Enter an amount greater than zero.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "-25",
+        "event": "invalid_field",
+        "message": "Enter a positive amount in rupees with up to two decimal places.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "12.345",
+        "event": "invalid_field",
+        "message": "Enter a positive amount in rupees with up to two decimal places.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "NaN",
+        "event": "invalid_field",
+        "message": "Enter a positive amount in rupees with up to two decimal places.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[number]",
+        "event": "invalid_field",
+        "message": "The maximum transfer in this sandbox is ₹5,00,000.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[number]",
+        "event": "invalid_field",
+        "message": "Insufficient available demo balance. Enter a smaller amount.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Change amount before confirmation",
+    "group": "Transfers",
+    "status": "PASS",
+    "observed": "Revised amount produced a new review and only the confirmed paise value committed.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.764
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.456
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.557
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 1.169
+      },
+      {
+        "event": "ask_rail",
+        "ms": 0.995
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.736
+      },
+      {
+        "event": "review",
+        "ms": 0.735
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 0.756
+      },
+      {
+        "event": "ask_rail",
+        "ms": 0.931
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.717
+      },
+      {
+        "event": "review",
+        "ms": 0.86
+      },
+      {
+        "event": "transfer_complete",
+        "ms": 1.263
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transfer money",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_payee",
+        "message": "Choose a registered demo beneficiary.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Meera Rao",
+        "event": "ask_transfer_amount",
+        "message": "Enter the transfer amount in rupees for Meera Rao, account ending 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "1500",
+        "event": "ask_rail",
+        "message": "Choose a simulated payment rail.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "IMPS",
+        "event": "ask_purpose",
+        "message": "Choose a payment purpose.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Personal",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review simulated transfer",
+        "rows": [
+          [
+            "Beneficiary",
+            "Meera Rao · •••• 2002"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ],
+          [
+            "Purpose",
+            "Personal"
+          ]
+        ]
+      },
+      {
+        "echo": "Change amount",
+        "event": "ask_transfer_amount",
+        "message": "Enter the revised amount in rupees.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "2000.25",
+        "event": "ask_rail",
+        "message": "Choose a simulated payment rail.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "UPI",
+        "event": "ask_purpose",
+        "message": "Choose a payment purpose.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Household",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review simulated transfer",
+        "rows": [
+          [
+            "Beneficiary",
+            "Meera Rao · •••• 2002"
+          ],
+          [
+            "Amount",
+            "₹2,000.25"
+          ],
+          [
+            "Demo rail",
+            "UPI"
+          ],
+          [
+            "Purpose",
+            "Household"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "transfer_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "TRF-33B528F018",
+        "rows": [
+          [
+            "Status",
+            "Recorded in sandbox"
+          ],
+          [
+            "Beneficiary",
+            "Meera Rao"
+          ],
+          [
+            "Amount",
+            "₹2,000.25"
+          ],
+          [
+            "Demo rail",
+            "UPI"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "High-value beneficiary re-entry",
+    "group": "Transfers",
+    "status": "PASS",
+    "observed": "A transfer at the step-up threshold needed the correct payee suffix.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.988
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.296
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.471
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 1.038
+      },
+      {
+        "event": "ask_rail",
+        "ms": 1.069
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.744
+      },
+      {
+        "event": "ask_payee_check",
+        "ms": 0.783
+      },
+      {
+        "event": "invalid_field",
+        "ms": 1.095
+      },
+      {
+        "event": "review",
+        "ms": 0.851
+      },
+      {
+        "event": "transfer_complete",
+        "ms": 1.232
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transfer money",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_payee",
+        "message": "Choose a registered demo beneficiary.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Meera Rao",
+        "event": "ask_transfer_amount",
+        "message": "Enter the transfer amount in rupees for Meera Rao, account ending 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "25000",
+        "event": "ask_rail",
+        "message": "Choose a simulated payment rail.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "NEFT",
+        "event": "ask_purpose",
+        "message": "Choose a payment purpose.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Personal",
+        "event": "ask_payee_check",
+        "message": "For this demo amount, re-enter the beneficiary suffix 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Beneficiary suffix entered]",
+        "event": "invalid_field",
+        "message": "The beneficiary suffix did not match. Re-enter its four digits.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Beneficiary suffix entered]",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review simulated transfer",
+        "rows": [
+          [
+            "Beneficiary",
+            "Meera Rao · •••• 2002"
+          ],
+          [
+            "Amount",
+            "₹25,000.00"
+          ],
+          [
+            "Demo rail",
+            "NEFT"
+          ],
+          [
+            "Purpose",
+            "Personal"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "transfer_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "TRF-3CFA43A8EE",
+        "rows": [
+          [
+            "Status",
+            "Recorded in sandbox"
+          ],
+          [
+            "Beneficiary",
+            "Meera Rao"
+          ],
+          [
+            "Amount",
+            "₹25,000.00"
+          ],
+          [
+            "Demo rail",
+            "NEFT"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Duplicate confirmation and conflicting ID",
+    "group": "Transfers",
+    "status": "PASS",
+    "observed": "Same request replayed one receipt; conflicting reuse was rejected.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.938
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.462
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.57
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 1.032
+      },
+      {
+        "event": "ask_rail",
+        "ms": 1.165
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.674
+      },
+      {
+        "event": "review",
+        "ms": 0.692
+      },
+      {
+        "event": "transfer_complete",
+        "ms": 1.533
+      },
+      {
+        "event": "transfer_complete",
+        "ms": 0.83
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transfer money",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_payee",
+        "message": "Choose a registered demo beneficiary.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Meera Rao",
+        "event": "ask_transfer_amount",
+        "message": "Enter the transfer amount in rupees for Meera Rao, account ending 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "1500",
+        "event": "ask_rail",
+        "message": "Choose a simulated payment rail.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "IMPS",
+        "event": "ask_purpose",
+        "message": "Choose a payment purpose.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Personal",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review simulated transfer",
+        "rows": [
+          [
+            "Beneficiary",
+            "Meera Rao · •••• 2002"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ],
+          [
+            "Purpose",
+            "Personal"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "transfer_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "TRF-00417A2430",
+        "rows": [
+          [
+            "Status",
+            "Recorded in sandbox"
+          ],
+          [
+            "Beneficiary",
+            "Meera Rao"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "transfer_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "TRF-00417A2430",
+        "rows": [
+          [
+            "Status",
+            "Recorded in sandbox"
+          ],
+          [
+            "Beneficiary",
+            "Meera Rao"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Competing transfers",
+    "group": "Transfers",
+    "status": "PASS",
+    "observed": "One of two competing debits succeeded; the other failed the transactional balance check.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.885
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.502
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.608
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 1.019
+      },
+      {
+        "event": "ask_rail",
+        "ms": 0.978
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.926
+      },
+      {
+        "event": "ask_payee_check",
+        "ms": 0.81
+      },
+      {
+        "event": "review",
+        "ms": 0.868
+      },
+      {
+        "event": "ask_identity",
+        "ms": 0.809
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.324
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.799
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 1.149
+      },
+      {
+        "event": "ask_rail",
+        "ms": 1.234
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.869
+      },
+      {
+        "event": "ask_payee_check",
+        "ms": 0.94
+      },
+      {
+        "event": "review",
+        "ms": 0.681
+      },
+      {
+        "event": "transfer_complete",
+        "ms": 2.082
+      },
+      {
+        "event": "commit_rejected",
+        "ms": 3.315
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transfer money",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_payee",
+        "message": "Choose a registered demo beneficiary.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Meera Rao",
+        "event": "ask_transfer_amount",
+        "message": "Enter the transfer amount in rupees for Meera Rao, account ending 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "90000",
+        "event": "ask_rail",
+        "message": "Choose a simulated payment rail.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "IMPS",
+        "event": "ask_purpose",
+        "message": "Choose a payment purpose.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Personal",
+        "event": "ask_payee_check",
+        "message": "For this demo amount, re-enter the beneficiary suffix 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Beneficiary suffix entered]",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review simulated transfer",
+        "rows": [
+          [
+            "Beneficiary",
+            "Meera Rao · •••• 2002"
+          ],
+          [
+            "Amount",
+            "₹90,000.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ],
+          [
+            "Purpose",
+            "Personal"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "commit_rejected",
+        "message": "Insufficient available demo balance.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Restart persistence",
+    "group": "Transfers",
+    "status": "PASS",
+    "observed": "New server and browser session retrieved the persisted balance and reference.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.878
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.679
+      },
+      {
+        "event": "ask_payee",
+        "ms": 1.799
+      },
+      {
+        "event": "ask_transfer_amount",
+        "ms": 1.249
+      },
+      {
+        "event": "ask_rail",
+        "ms": 1.045
+      },
+      {
+        "event": "ask_purpose",
+        "ms": 0.658
+      },
+      {
+        "event": "review",
+        "ms": 0.773
+      },
+      {
+        "event": "transfer_complete",
+        "ms": 1.325
+      },
+      {
+        "event": "ask_identity",
+        "ms": 0.723
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.6
+      },
+      {
+        "event": "balance_complete",
+        "ms": 1.172
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Transfer money",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_payee",
+        "message": "Choose a registered demo beneficiary.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Meera Rao",
+        "event": "ask_transfer_amount",
+        "message": "Enter the transfer amount in rupees for Meera Rao, account ending 2002.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "1500",
+        "event": "ask_rail",
+        "message": "Choose a simulated payment rail.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "IMPS",
+        "event": "ask_purpose",
+        "message": "Choose a payment purpose.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Personal",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review simulated transfer",
+        "rows": [
+          [
+            "Beneficiary",
+            "Meera Rao · •••• 2002"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ],
+          [
+            "Purpose",
+            "Personal"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "transfer_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "TRF-64B04C0BCD",
+        "rows": [
+          [
+            "Status",
+            "Recorded in sandbox"
+          ],
+          [
+            "Beneficiary",
+            "Meera Rao"
+          ],
+          [
+            "Amount",
+            "₹1,500.00"
+          ],
+          [
+            "Demo rail",
+            "IMPS"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Loan criteria pass and fail",
+    "group": "Lending",
+    "status": "PASS",
+    "observed": "The sample affordability/score rule produced both outcomes on two profiles.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.883
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.47
+      },
+      {
+        "event": "ask_loan_type",
+        "ms": 1.428
+      },
+      {
+        "event": "ask_loan_amount",
+        "ms": 0.773
+      },
+      {
+        "event": "ask_loan_tenure",
+        "ms": 1.182
+      },
+      {
+        "event": "eligibility_complete",
+        "ms": 1.105
+      },
+      {
+        "event": "ask_identity",
+        "ms": 1.554
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.903
+      },
+      {
+        "event": "ask_loan_type",
+        "ms": 2.35
+      },
+      {
+        "event": "ask_loan_amount",
+        "ms": 0.808
+      },
+      {
+        "event": "ask_loan_tenure",
+        "ms": 0.74
+      },
+      {
+        "event": "eligibility_complete",
+        "ms": 0.941
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Loan eligibility",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_loan_type",
+        "message": "Choose the demo loan product.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Personal",
+        "event": "ask_loan_amount",
+        "message": "Enter a proposed loan principal in rupees.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[number]",
+        "event": "ask_loan_tenure",
+        "message": "Enter a tenure from 6 to 360 months.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "24",
+        "event": "eligibility_complete",
+        "message": "This estimate applies the synthetic credit score and repayment limits.",
+        "title": "Demo loan estimate",
+        "rows": [
+          [
+            "Product",
+            "Personal"
+          ],
+          [
+            "Sample annual rate",
+            "12.00%"
+          ],
+          [
+            "Estimated EMI",
+            "₹9,414.69"
+          ],
+          [
+            "Debt to income",
+            "28.13%"
+          ],
+          [
+            "Demo outcome",
+            "Meets sample criteria"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Existing loan EMI query",
+    "group": "Lending",
+    "status": "PASS",
+    "observed": "Owned loan returned seeded principal, monthly EMI and next due date.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.705
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.717
+      },
+      {
+        "event": "loan_complete",
+        "ms": 1.354
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Existing loan EMI",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "loan_complete",
+        "message": "Here are the recorded repayment details.",
+        "title": "LN-1001",
+        "rows": [
+          [
+            "Product",
+            "Home"
+          ],
+          [
+            "Outstanding principal",
+            "₹12,40,000.00"
+          ],
+          [
+            "Monthly EMI",
+            "₹14,500.00"
+          ],
+          [
+            "Next due date",
+            "2026-11-24"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "FD quote, booking and enquiry",
+    "group": "Deposits",
+    "status": "PASS",
+    "observed": "Quote, confirmation, balance debit and deposit retrieval agreed.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.76
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.383
+      },
+      {
+        "event": "ask_fd_amount",
+        "ms": 1.435
+      },
+      {
+        "event": "invalid_field",
+        "ms": 0.888
+      },
+      {
+        "event": "ask_fd_tenure",
+        "ms": 0.897
+      },
+      {
+        "event": "review",
+        "ms": 0.731
+      },
+      {
+        "event": "deposit_complete",
+        "ms": 1.417
+      },
+      {
+        "event": "deposits_complete",
+        "ms": 1.27
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Book a fixed deposit",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_fd_amount",
+        "message": "Enter the deposit principal in rupees, starting at ₹1,000.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "999",
+        "event": "invalid_field",
+        "message": "Enter a principal from ₹1,000 to ₹5,00,000.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "10000",
+        "event": "ask_fd_tenure",
+        "message": "Choose a fixed-deposit tenure.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "12 months",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review fixed deposit",
+        "rows": [
+          [
+            "Principal",
+            "₹10,000.00"
+          ],
+          [
+            "Annual rate",
+            "6.50%"
+          ],
+          [
+            "Quoted maturity",
+            "₹10,666.02"
+          ],
+          [
+            "Maturity date",
+            "2027-11-12"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "deposit_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "FD-E57ECE8AB6",
+        "rows": [
+          [
+            "Status",
+            "Booked in sandbox"
+          ],
+          [
+            "Principal",
+            "₹10,000.00"
+          ],
+          [
+            "Maturity",
+            "₹10,666.02"
+          ],
+          [
+            "Maturity date",
+            "2027-11-12"
+          ]
+        ]
+      },
+      {
+        "echo": "View fixed deposits",
+        "event": "deposits_complete",
+        "message": "Here are the fixed deposits for your verified demo profile.",
+        "title": "Fixed deposits",
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Failed FD funding rollback",
+    "group": "Deposits",
+    "status": "PASS",
+    "observed": "Failed funding wrote neither a deposit nor an operation receipt.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.929
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.704
+      },
+      {
+        "event": "ask_fd_amount",
+        "ms": 1.405
+      },
+      {
+        "event": "ask_fd_tenure",
+        "ms": 0.777
+      },
+      {
+        "event": "review",
+        "ms": 0.848
+      },
+      {
+        "event": "commit_rejected",
+        "ms": 1.244
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Book a fixed deposit",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_fd_amount",
+        "message": "Enter the deposit principal in rupees, starting at ₹1,000.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[number]",
+        "event": "ask_fd_tenure",
+        "message": "Choose a fixed-deposit tenure.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "24 months",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review fixed deposit",
+        "rows": [
+          [
+            "Principal",
+            "₹1,50,000.00"
+          ],
+          [
+            "Annual rate",
+            "6.80%"
+          ],
+          [
+            "Quoted maturity",
+            "₹1,71,655.96"
+          ],
+          [
+            "Maturity date",
+            "2028-11-12"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "commit_rejected",
+        "message": "Insufficient available demo balance.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Card statement, limit and due",
+    "group": "Cards",
+    "status": "PASS",
+    "observed": "Statement, available credit, reward points and due information were returned.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.748
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.427
+      },
+      {
+        "event": "statement_complete",
+        "ms": 1.489
+      },
+      {
+        "event": "limit_complete",
+        "ms": 1.109
+      },
+      {
+        "event": "due_complete",
+        "ms": 0.989
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Card statement",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "statement_complete",
+        "message": "Here are the details for your verified demo card.",
+        "title": "Credit card",
+        "rows": [
+          [
+            "Card",
+            "•••• 4242"
+          ],
+          [
+            "Status",
+            "Active"
+          ],
+          [
+            "Total due",
+            "₹18,450.00"
+          ],
+          [
+            "Minimum due",
+            "₹922.50"
+          ],
+          [
+            "Payment due date",
+            "2026-11-29"
+          ]
+        ]
+      },
+      {
+        "echo": "Card limit and rewards",
+        "event": "limit_complete",
+        "message": "Here are the details for your verified demo card.",
+        "title": "Credit card",
+        "rows": [
+          [
+            "Card",
+            "•••• 4242"
+          ],
+          [
+            "Status",
+            "Active"
+          ],
+          [
+            "Credit limit",
+            "₹1,50,000.00"
+          ],
+          [
+            "Available credit",
+            "₹1,31,550.00"
+          ],
+          [
+            "Reward points",
+            "1400"
+          ]
+        ]
+      },
+      {
+        "echo": "Card payment due",
+        "event": "due_complete",
+        "message": "Here are the details for your verified demo card.",
+        "title": "Credit card",
+        "rows": [
+          [
+            "Card",
+            "•••• 4242"
+          ],
+          [
+            "Status",
+            "Active"
+          ],
+          [
+            "Total due",
+            "₹18,450.00"
+          ],
+          [
+            "Minimum due",
+            "₹922.50"
+          ],
+          [
+            "Payment due date",
+            "2026-11-29"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Card limit review ticket",
+    "group": "Cards",
+    "status": "PASS",
+    "observed": "Limit review created a local ticket without raising the stored limit.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.928
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.393
+      },
+      {
+        "event": "ask_limit_amount",
+        "ms": 1.474
+      },
+      {
+        "event": "invalid_field",
+        "ms": 1.029
+      },
+      {
+        "event": "review",
+        "ms": 1.344
+      },
+      {
+        "event": "case_complete",
+        "ms": 1.064
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Request a higher card limit",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_limit_amount",
+        "message": "Enter the requested total card limit in rupees.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[number]",
+        "event": "invalid_field",
+        "message": "Choose a demo limit above the current limit and up to ₹10,00,000.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[number]",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review limit review",
+        "rows": [
+          [
+            "Type",
+            "Limit review"
+          ],
+          [
+            "Subject",
+            "₹1,80,000.00"
+          ],
+          [
+            "Contact",
+            "In-app"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "case_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "LIM-0C4863483C",
+        "rows": [
+          [
+            "Status",
+            "Open"
+          ],
+          [
+            "Case type",
+            "Limit review"
+          ],
+          [
+            "Subject",
+            "₹1,80,000.00"
+          ],
+          [
+            "Target",
+            "2 working days (demo)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fraud report ownership",
+    "group": "Cases",
+    "status": "PASS",
+    "observed": "Foreign transaction denied; owned transaction yielded a fraud case.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.971
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.402
+      },
+      {
+        "event": "ask_transaction_ref",
+        "ms": 1.628
+      },
+      {
+        "event": "invalid_field",
+        "ms": 1.182
+      },
+      {
+        "event": "ask_description",
+        "ms": 1.125
+      },
+      {
+        "event": "review",
+        "ms": 0.757
+      },
+      {
+        "event": "case_complete",
+        "ms": 1.182
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Report a suspicious transaction",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_transaction_ref",
+        "message": "Enter an owned transaction reference or choose a recent one.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "TXN-1002-01",
+        "event": "invalid_field",
+        "message": "No matching transaction was found for this verified profile.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "TXN-1001-01",
+        "event": "ask_description",
+        "message": "Describe the suspicious demo transaction in 12 to 240 characters.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo description entered]",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review fraud alert",
+        "rows": [
+          [
+            "Type",
+            "Fraud alert"
+          ],
+          [
+            "Subject",
+            "TXN-1001-01"
+          ],
+          [
+            "Contact",
+            "In-app"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "case_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "FRD-88B381985C",
+        "rows": [
+          [
+            "Status",
+            "Open"
+          ],
+          [
+            "Case type",
+            "Fraud alert"
+          ],
+          [
+            "Subject",
+            "TXN-1001-01"
+          ],
+          [
+            "Target",
+            "2 working days (demo)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Confirmed card block",
+    "group": "Cards",
+    "status": "PASS",
+    "observed": "Confirmed block persisted and a repeat did not create a second action.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.867
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.828
+      },
+      {
+        "event": "review",
+        "ms": 1.947
+      },
+      {
+        "event": "card_block_complete",
+        "ms": 1.101
+      },
+      {
+        "event": "card_already_blocked",
+        "ms": 1.897
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Block demo card",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review demo card block",
+        "rows": [
+          [
+            "Card",
+            "•••• 4242"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "card_block_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "BLK-CABED12D0F",
+        "rows": [
+          [
+            "Status",
+            "Blocked in sandbox"
+          ],
+          [
+            "Card",
+            "•••• 4242"
+          ]
+        ]
+      },
+      {
+        "echo": "Block demo card",
+        "event": "card_already_blocked",
+        "message": "This demo card is already blocked.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Grievance receipt and case status",
+    "group": "Cases",
+    "status": "PASS",
+    "observed": "Confirmed grievance was retrievable through its saved reference.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.8
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.488
+      },
+      {
+        "event": "ask_category",
+        "ms": 1.445
+      },
+      {
+        "event": "ask_description",
+        "ms": 0.827
+      },
+      {
+        "event": "ask_contact",
+        "ms": 0.789
+      },
+      {
+        "event": "review",
+        "ms": 0.892
+      },
+      {
+        "event": "case_complete",
+        "ms": 1.291
+      },
+      {
+        "event": "ask_case_ref",
+        "ms": 1.348
+      },
+      {
+        "event": "case_complete",
+        "ms": 0.986
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Register a grievance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_category",
+        "message": "Choose a grievance category.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Charges",
+        "event": "ask_description",
+        "message": "Describe the demo complaint in 12 to 240 characters.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo description entered]",
+        "event": "ask_contact",
+        "message": "Choose a demo contact preference.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "In-app",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review grievance",
+        "rows": [
+          [
+            "Type",
+            "Grievance"
+          ],
+          [
+            "Subject",
+            "Charges"
+          ],
+          [
+            "Contact",
+            "In-app"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "case_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "GRV-E2534AF599",
+        "rows": [
+          [
+            "Status",
+            "Open"
+          ],
+          [
+            "Case type",
+            "Grievance"
+          ],
+          [
+            "Subject",
+            "Charges"
+          ],
+          [
+            "Target",
+            "2 working days (demo)"
+          ]
+        ]
+      },
+      {
+        "echo": "Track a case",
+        "event": "ask_case_ref",
+        "message": "Enter a case reference from a saved receipt.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[reference]",
+        "event": "case_complete",
+        "message": "Here is the case recorded for your verified profile.",
+        "title": "GRV-E2534AF599",
+        "rows": [
+          [
+            "Type",
+            "Grievance"
+          ],
+          [
+            "Status",
+            "Open"
+          ],
+          [
+            "Opened",
+            "2026-11-12"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cross-profile case denial",
+    "group": "Cases",
+    "status": "PASS",
+    "observed": "Verified second customer received an ownership-safe lookup miss.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 1.228
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.318
+      },
+      {
+        "event": "ask_category",
+        "ms": 1.529
+      },
+      {
+        "event": "ask_description",
+        "ms": 0.859
+      },
+      {
+        "event": "ask_contact",
+        "ms": 0.712
+      },
+      {
+        "event": "review",
+        "ms": 0.888
+      },
+      {
+        "event": "case_complete",
+        "ms": 1.194
+      },
+      {
+        "event": "ask_identity",
+        "ms": 0.644
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.298
+      },
+      {
+        "event": "ask_case_ref",
+        "ms": 1.356
+      },
+      {
+        "event": "case_not_found",
+        "ms": 0.99
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Register a grievance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_category",
+        "message": "Choose a grievance category.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Charges",
+        "event": "ask_description",
+        "message": "Describe the demo complaint in 12 to 240 characters.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo description entered]",
+        "event": "ask_contact",
+        "message": "Choose a demo contact preference.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "In-app",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review grievance",
+        "rows": [
+          [
+            "Type",
+            "Grievance"
+          ],
+          [
+            "Subject",
+            "Charges"
+          ],
+          [
+            "Contact",
+            "In-app"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "case_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "GRV-CF767D5D31",
+        "rows": [
+          [
+            "Status",
+            "Open"
+          ],
+          [
+            "Case type",
+            "Grievance"
+          ],
+          [
+            "Subject",
+            "Charges"
+          ],
+          [
+            "Target",
+            "2 working days (demo)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Masked echoes and audit",
+    "group": "Verification",
+    "status": "PASS",
+    "observed": "Audit and user echoes omitted the demo identity, mobile and case description.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.807
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.581
+      },
+      {
+        "event": "ask_category",
+        "ms": 1.37
+      },
+      {
+        "event": "ask_description",
+        "ms": 0.804
+      },
+      {
+        "event": "ask_contact",
+        "ms": 0.954
+      },
+      {
+        "event": "review",
+        "ms": 0.746
+      },
+      {
+        "event": "case_complete",
+        "ms": 1.088
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Register a grievance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "ask_category",
+        "message": "Choose a grievance category.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Charges",
+        "event": "ask_description",
+        "message": "Describe the demo complaint in 12 to 240 characters.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo description entered]",
+        "event": "ask_contact",
+        "message": "Choose a demo contact preference.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "In-app",
+        "event": "review",
+        "message": "Review the details and confirm to record this action in the sandbox.",
+        "title": "Review grievance",
+        "rows": [
+          [
+            "Type",
+            "Grievance"
+          ],
+          [
+            "Subject",
+            "Charges"
+          ],
+          [
+            "Contact",
+            "In-app"
+          ]
+        ]
+      },
+      {
+        "echo": "Confirm",
+        "event": "case_complete",
+        "message": "Action recorded in the local banking sandbox.",
+        "title": "GRV-A23A71010D",
+        "rows": [
+          [
+            "Status",
+            "Open"
+          ],
+          [
+            "Case type",
+            "Grievance"
+          ],
+          [
+            "Subject",
+            "Charges"
+          ],
+          [
+            "Target",
+            "2 working days (demo)"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Anonymous and cross-origin requests",
+    "group": "Interface",
+    "status": "PASS",
+    "observed": "Anonymous and foreign-origin requests could not use protected routes.",
+    "timings": [],
+    "transcript": []
+  },
+  {
+    "name": "New chat revokes verification",
+    "group": "Verification",
+    "status": "PASS",
+    "observed": "New chat rotated the session and required verification again.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 0.804
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.322
+      },
+      {
+        "event": "balance_complete",
+        "ms": 1.306
+      },
+      {
+        "event": "ask_identity",
+        "ms": 0.801
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "Check balance",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Demo identity entered]",
+        "event": "otp_issued",
+        "message": "A verification code appears in Demo inbox when the sample identity matches. Enter the code within five minutes.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "[Verification code entered]",
+        "event": "balance_complete",
+        "message": "Here are the balances for the verified demo account.",
+        "title": "Savings balance",
+        "rows": [
+          [
+            "Account",
+            "•••• 1001"
+          ],
+          [
+            "Ledger balance",
+            "₹1,25,000.00"
+          ],
+          [
+            "Available balance",
+            "₹1,25,000.00"
+          ]
+        ]
+      },
+      {
+        "echo": "Card statement",
+        "event": "ask_identity",
+        "message": "Enter a fictional customer ID or demo mobile number. Use the Demo records panel for sample values.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Fallback and no pending draft",
+    "group": "Interface",
+    "status": "PASS",
+    "observed": "Unsupported input and confirmation without a draft produced no write.",
+    "timings": [
+      {
+        "event": "fallback",
+        "ms": 0.835
+      },
+      {
+        "event": "no_pending_draft",
+        "ms": 0.801
+      }
+    ],
+    "transcript": [
+      {
+        "echo": "🪐🪐",
+        "event": "fallback",
+        "message": "I can help with the banking services shown below. Choose one or rephrase your request.",
+        "title": null,
+        "rows": []
+      },
+      {
+        "echo": "Confirm",
+        "event": "no_pending_draft",
+        "message": "Choose a service before confirming or cancelling.",
+        "title": null,
+        "rows": []
+      }
+    ]
+  },
+  {
+    "name": "Rasa HTTP contract via stub",
+    "group": "Interface",
+    "status": "PASS",
+    "observed": "Rasa-compatible stub received one redacted opening turn; workflow fields stayed local.",
+    "timings": [
+      {
+        "event": "ask_identity",
+        "ms": 1.376
+      },
+      {
+        "event": "otp_issued",
+        "ms": 1.364
+      },
+      {
+        "event": "balance_complete",
+        "ms": 1.257
+      }
+    ],
+    "transcript": []
+  }
+]

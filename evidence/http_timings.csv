@@ -1,0 +1,223 @@
+scenario,group,event,ms
+Verified balance from typed request,Accounts,ask_identity,1.386
+Verified balance from typed request,Accounts,otp_issued,1.638
+Verified balance from typed request,Accounts,balance_complete,1.613
+Unknown identity and inbox isolation,Verification,ask_identity,0.929
+Unknown identity and inbox isolation,Verification,invalid_identity,0.812
+Unknown identity and inbox isolation,Verification,otp_issued,1.327
+Unknown identity and inbox isolation,Verification,ask_identity,1.014
+Unknown identity and inbox isolation,Verification,otp_issued,1.175
+"Wrong, malformed and consumed OTP",Verification,ask_identity,0.705
+"Wrong, malformed and consumed OTP",Verification,otp_issued,1.355
+"Wrong, malformed and consumed OTP",Verification,otp_format,1.084
+"Wrong, malformed and consumed OTP",Verification,otp_rejected,1.184
+"Wrong, malformed and consumed OTP",Verification,balance_complete,1.18
+Three-attempt OTP lock,Verification,ask_identity,1.083
+Three-attempt OTP lock,Verification,otp_issued,1.623
+Three-attempt OTP lock,Verification,otp_rejected,1.026
+Three-attempt OTP lock,Verification,otp_rejected,1.078
+Three-attempt OTP lock,Verification,otp_locked,1.101
+Three-attempt OTP lock,Verification,ask_identity,0.742
+Three-attempt OTP lock,Verification,otp_locked,1.508
+"OTP cooldown, expiry and resend",Verification,ask_identity,0.89
+"OTP cooldown, expiry and resend",Verification,otp_issued,1.637
+"OTP cooldown, expiry and resend",Verification,otp_cooldown,0.741
+"OTP cooldown, expiry and resend",Verification,otp_expired,1.127
+"OTP cooldown, expiry and resend",Verification,otp_issued,1.405
+"OTP cooldown, expiry and resend",Verification,balance_complete,1.474
+Rolling OTP issue limit,Verification,ask_identity,0.763
+Rolling OTP issue limit,Verification,otp_issued,1.453
+Rolling OTP issue limit,Verification,otp_issued,1.076
+Rolling OTP issue limit,Verification,otp_issued,1.035
+Rolling OTP issue limit,Verification,otp_issued,1.012
+Rolling OTP issue limit,Verification,otp_rate_limited,0.757
+Verification expiry before commit,Verification,ask_identity,0.797
+Verification expiry before commit,Verification,otp_issued,1.374
+Verification expiry before commit,Verification,ask_payee,1.565
+Verification expiry before commit,Verification,ask_transfer_amount,0.965
+Verification expiry before commit,Verification,ask_rail,1.155
+Verification expiry before commit,Verification,ask_purpose,0.834
+Verification expiry before commit,Verification,review,0.728
+Verification expiry before commit,Verification,awaiting_confirmation,1.008
+Verification expiry before commit,Verification,verification_expired,0.794
+Filtered transaction history,Accounts,ask_identity,0.856
+Filtered transaction history,Accounts,otp_issued,1.341
+Filtered transaction history,Accounts,ask_range,1.924
+Filtered transaction history,Accounts,ask_direction,1.032
+Filtered transaction history,Accounts,ask_min_amount,0.726
+Filtered transaction history,Accounts,history_complete,1.293
+Confirmed transfer reconciliation,Transfers,ask_identity,0.705
+Confirmed transfer reconciliation,Transfers,otp_issued,1.615
+Confirmed transfer reconciliation,Transfers,ask_payee,1.628
+Confirmed transfer reconciliation,Transfers,ask_transfer_amount,1.257
+Confirmed transfer reconciliation,Transfers,ask_rail,1.024
+Confirmed transfer reconciliation,Transfers,ask_purpose,0.876
+Confirmed transfer reconciliation,Transfers,review,0.688
+Confirmed transfer reconciliation,Transfers,transfer_complete,1.297
+Cancelled transfer,Transfers,ask_identity,0.89
+Cancelled transfer,Transfers,otp_issued,1.499
+Cancelled transfer,Transfers,ask_payee,1.687
+Cancelled transfer,Transfers,ask_transfer_amount,1.022
+Cancelled transfer,Transfers,ask_rail,1.065
+Cancelled transfer,Transfers,ask_purpose,0.816
+Cancelled transfer,Transfers,review,1.258
+Cancelled transfer,Transfers,cancelled,0.877
+"Payee, amount and balance validation",Transfers,ask_identity,0.996
+"Payee, amount and balance validation",Transfers,otp_issued,1.569
+"Payee, amount and balance validation",Transfers,ask_payee,1.564
+"Payee, amount and balance validation",Transfers,invalid_field,1.05
+"Payee, amount and balance validation",Transfers,ask_transfer_amount,0.972
+"Payee, amount and balance validation",Transfers,invalid_field,0.764
+"Payee, amount and balance validation",Transfers,invalid_field,0.809
+"Payee, amount and balance validation",Transfers,invalid_field,0.848
+"Payee, amount and balance validation",Transfers,invalid_field,0.768
+"Payee, amount and balance validation",Transfers,invalid_field,0.98
+"Payee, amount and balance validation",Transfers,invalid_field,0.974
+Change amount before confirmation,Transfers,ask_identity,0.764
+Change amount before confirmation,Transfers,otp_issued,1.456
+Change amount before confirmation,Transfers,ask_payee,1.557
+Change amount before confirmation,Transfers,ask_transfer_amount,1.169
+Change amount before confirmation,Transfers,ask_rail,0.995
+Change amount before confirmation,Transfers,ask_purpose,0.736
+Change amount before confirmation,Transfers,review,0.735
+Change amount before confirmation,Transfers,ask_transfer_amount,0.756
+Change amount before confirmation,Transfers,ask_rail,0.931
+Change amount before confirmation,Transfers,ask_purpose,0.717
+Change amount before confirmation,Transfers,review,0.86
+Change amount before confirmation,Transfers,transfer_complete,1.263
+High-value beneficiary re-entry,Transfers,ask_identity,0.988
+High-value beneficiary re-entry,Transfers,otp_issued,1.296
+High-value beneficiary re-entry,Transfers,ask_payee,1.471
+High-value beneficiary re-entry,Transfers,ask_transfer_amount,1.038
+High-value beneficiary re-entry,Transfers,ask_rail,1.069
+High-value beneficiary re-entry,Transfers,ask_purpose,0.744
+High-value beneficiary re-entry,Transfers,ask_payee_check,0.783
+High-value beneficiary re-entry,Transfers,invalid_field,1.095
+High-value beneficiary re-entry,Transfers,review,0.851
+High-value beneficiary re-entry,Transfers,transfer_complete,1.232
+Duplicate confirmation and conflicting ID,Transfers,ask_identity,0.938
+Duplicate confirmation and conflicting ID,Transfers,otp_issued,1.462
+Duplicate confirmation and conflicting ID,Transfers,ask_payee,1.57
+Duplicate confirmation and conflicting ID,Transfers,ask_transfer_amount,1.032
+Duplicate confirmation and conflicting ID,Transfers,ask_rail,1.165
+Duplicate confirmation and conflicting ID,Transfers,ask_purpose,0.674
+Duplicate confirmation and conflicting ID,Transfers,review,0.692
+Duplicate confirmation and conflicting ID,Transfers,transfer_complete,1.533
+Duplicate confirmation and conflicting ID,Transfers,transfer_complete,0.83
+Competing transfers,Transfers,ask_identity,0.885
+Competing transfers,Transfers,otp_issued,1.502
+Competing transfers,Transfers,ask_payee,1.608
+Competing transfers,Transfers,ask_transfer_amount,1.019
+Competing transfers,Transfers,ask_rail,0.978
+Competing transfers,Transfers,ask_purpose,0.926
+Competing transfers,Transfers,ask_payee_check,0.81
+Competing transfers,Transfers,review,0.868
+Competing transfers,Transfers,ask_identity,0.809
+Competing transfers,Transfers,otp_issued,1.324
+Competing transfers,Transfers,ask_payee,1.799
+Competing transfers,Transfers,ask_transfer_amount,1.149
+Competing transfers,Transfers,ask_rail,1.234
+Competing transfers,Transfers,ask_purpose,0.869
+Competing transfers,Transfers,ask_payee_check,0.94
+Competing transfers,Transfers,review,0.681
+Competing transfers,Transfers,transfer_complete,2.082
+Competing transfers,Transfers,commit_rejected,3.315
+Restart persistence,Transfers,ask_identity,0.878
+Restart persistence,Transfers,otp_issued,1.679
+Restart persistence,Transfers,ask_payee,1.799
+Restart persistence,Transfers,ask_transfer_amount,1.249
+Restart persistence,Transfers,ask_rail,1.045
+Restart persistence,Transfers,ask_purpose,0.658
+Restart persistence,Transfers,review,0.773
+Restart persistence,Transfers,transfer_complete,1.325
+Restart persistence,Transfers,ask_identity,0.723
+Restart persistence,Transfers,otp_issued,1.6
+Restart persistence,Transfers,balance_complete,1.172
+Loan criteria pass and fail,Lending,ask_identity,0.883
+Loan criteria pass and fail,Lending,otp_issued,1.47
+Loan criteria pass and fail,Lending,ask_loan_type,1.428
+Loan criteria pass and fail,Lending,ask_loan_amount,0.773
+Loan criteria pass and fail,Lending,ask_loan_tenure,1.182
+Loan criteria pass and fail,Lending,eligibility_complete,1.105
+Loan criteria pass and fail,Lending,ask_identity,1.554
+Loan criteria pass and fail,Lending,otp_issued,1.903
+Loan criteria pass and fail,Lending,ask_loan_type,2.35
+Loan criteria pass and fail,Lending,ask_loan_amount,0.808
+Loan criteria pass and fail,Lending,ask_loan_tenure,0.74
+Loan criteria pass and fail,Lending,eligibility_complete,0.941
+Existing loan EMI query,Lending,ask_identity,0.705
+Existing loan EMI query,Lending,otp_issued,1.717
+Existing loan EMI query,Lending,loan_complete,1.354
+"FD quote, booking and enquiry",Deposits,ask_identity,0.76
+"FD quote, booking and enquiry",Deposits,otp_issued,1.383
+"FD quote, booking and enquiry",Deposits,ask_fd_amount,1.435
+"FD quote, booking and enquiry",Deposits,invalid_field,0.888
+"FD quote, booking and enquiry",Deposits,ask_fd_tenure,0.897
+"FD quote, booking and enquiry",Deposits,review,0.731
+"FD quote, booking and enquiry",Deposits,deposit_complete,1.417
+"FD quote, booking and enquiry",Deposits,deposits_complete,1.27
+Failed FD funding rollback,Deposits,ask_identity,0.929
+Failed FD funding rollback,Deposits,otp_issued,1.704
+Failed FD funding rollback,Deposits,ask_fd_amount,1.405
+Failed FD funding rollback,Deposits,ask_fd_tenure,0.777
+Failed FD funding rollback,Deposits,review,0.848
+Failed FD funding rollback,Deposits,commit_rejected,1.244
+"Card statement, limit and due",Cards,ask_identity,0.748
+"Card statement, limit and due",Cards,otp_issued,1.427
+"Card statement, limit and due",Cards,statement_complete,1.489
+"Card statement, limit and due",Cards,limit_complete,1.109
+"Card statement, limit and due",Cards,due_complete,0.989
+Card limit review ticket,Cards,ask_identity,0.928
+Card limit review ticket,Cards,otp_issued,1.393
+Card limit review ticket,Cards,ask_limit_amount,1.474
+Card limit review ticket,Cards,invalid_field,1.029
+Card limit review ticket,Cards,review,1.344
+Card limit review ticket,Cards,case_complete,1.064
+Fraud report ownership,Cases,ask_identity,0.971
+Fraud report ownership,Cases,otp_issued,1.402
+Fraud report ownership,Cases,ask_transaction_ref,1.628
+Fraud report ownership,Cases,invalid_field,1.182
+Fraud report ownership,Cases,ask_description,1.125
+Fraud report ownership,Cases,review,0.757
+Fraud report ownership,Cases,case_complete,1.182
+Confirmed card block,Cards,ask_identity,0.867
+Confirmed card block,Cards,otp_issued,1.828
+Confirmed card block,Cards,review,1.947
+Confirmed card block,Cards,card_block_complete,1.101
+Confirmed card block,Cards,card_already_blocked,1.897
+Grievance receipt and case status,Cases,ask_identity,0.8
+Grievance receipt and case status,Cases,otp_issued,1.488
+Grievance receipt and case status,Cases,ask_category,1.445
+Grievance receipt and case status,Cases,ask_description,0.827
+Grievance receipt and case status,Cases,ask_contact,0.789
+Grievance receipt and case status,Cases,review,0.892
+Grievance receipt and case status,Cases,case_complete,1.291
+Grievance receipt and case status,Cases,ask_case_ref,1.348
+Grievance receipt and case status,Cases,case_complete,0.986
+Cross-profile case denial,Cases,ask_identity,1.228
+Cross-profile case denial,Cases,otp_issued,1.318
+Cross-profile case denial,Cases,ask_category,1.529
+Cross-profile case denial,Cases,ask_description,0.859
+Cross-profile case denial,Cases,ask_contact,0.712
+Cross-profile case denial,Cases,review,0.888
+Cross-profile case denial,Cases,case_complete,1.194
+Cross-profile case denial,Cases,ask_identity,0.644
+Cross-profile case denial,Cases,otp_issued,1.298
+Cross-profile case denial,Cases,ask_case_ref,1.356
+Cross-profile case denial,Cases,case_not_found,0.99
+Masked echoes and audit,Verification,ask_identity,0.807
+Masked echoes and audit,Verification,otp_issued,1.581
+Masked echoes and audit,Verification,ask_category,1.37
+Masked echoes and audit,Verification,ask_description,0.804
+Masked echoes and audit,Verification,ask_contact,0.954
+Masked echoes and audit,Verification,review,0.746
+Masked echoes and audit,Verification,case_complete,1.088
+New chat revokes verification,Verification,ask_identity,0.804
+New chat revokes verification,Verification,otp_issued,1.322
+New chat revokes verification,Verification,balance_complete,1.306
+New chat revokes verification,Verification,ask_identity,0.801
+Fallback and no pending draft,Interface,fallback,0.835
+Fallback and no pending draft,Interface,no_pending_draft,0.801
+Rasa HTTP contract via stub,Interface,ask_identity,1.376
+Rasa HTTP contract via stub,Interface,otp_issued,1.364
+Rasa HTTP contract via stub,Interface,balance_complete,1.257

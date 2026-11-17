@@ -1,0 +1,161 @@
+text,expected,predicted
+What is left in savings right now,account_balance_enquiry,account_balance_enquiry
+Give me the available amount in my account,account_balance_enquiry,account_balance_enquiry
+How much can I withdraw from my account today,account_balance_enquiry,account_balance_enquiry
+Could you check the total funds I have,account_balance_enquiry,account_balance_enquiry
+I would like my bank balance today,account_balance_enquiry,account_balance_enquiry
+What is the current ledger amount,account_balance_enquiry,account_balance_enquiry
+How much remains after my recent withdrawal,account_balance_enquiry,credit_card_limit_enquiry
+Show the money available in my savings account,account_balance_enquiry,account_balance_enquiry
+Could you show the debits over the past fortnight,transaction_history_request,transaction_history_request
+I need the entries posted to my account last week,transaction_history_request,transaction_history_request
+Can we review money coming in recently,transaction_history_request,greet
+Show the account ledger for the last seven days,transaction_history_request,transaction_history_request
+Which withdrawals were made this month,transaction_history_request,transaction_history_request
+Pull up my last few bank transactions,transaction_history_request,transaction_history_request
+List recent savings activity,transaction_history_request,transaction_history_request
+Display my credit entries for the last month,transaction_history_request,transaction_history_request
+I want to send fifty rupees to my saved recipient,fund_transfer_initiation,fund_transfer_initiation
+Please move funds to my registered beneficiary,fund_transfer_initiation,fund_transfer_initiation
+Can I make a payment to a friend via UPI,fund_transfer_initiation,fund_transfer_initiation
+Let me start a transfer from this account,fund_transfer_initiation,fund_transfer_initiation
+Help me send a small bank payment,fund_transfer_initiation,fund_transfer_initiation
+I want to remit cash using NEFT,fund_transfer_initiation,fund_transfer_initiation
+Move some of my savings to Kiran,fund_transfer_initiation,fund_transfer_initiation
+I would like to pay a saved payee now,fund_transfer_initiation,fund_transfer_initiation
+Would I qualify to borrow for a car,loan_eligibility_enquiry,loan_eligibility_enquiry
+Can I be considered for a new personal loan,loan_eligibility_enquiry,loan_eligibility_enquiry
+Tell me if my profile can get a home loan,loan_eligibility_enquiry,loan_eligibility_enquiry
+Am I likely to get financing for my studies,loan_eligibility_enquiry,loan_eligibility_enquiry
+Check whether my income supports a fresh loan,loan_eligibility_enquiry,loan_eligibility_enquiry
+Estimate how much I can borrow under the demo rules,loan_eligibility_enquiry,loan_eligibility_enquiry
+Could I apply for a new vehicle loan,loan_eligibility_enquiry,loan_eligibility_enquiry
+Please assess my borrowing capacity,loan_eligibility_enquiry,loan_eligibility_enquiry
+Can you find the due date for my active loan,loan_emi_query,loan_emi_query
+What is my next instalment on my outstanding loan,loan_emi_query,loan_emi_query
+Tell me what I still owe on the loan I already have,loan_emi_query,loan_emi_query
+I want to see the remaining loan repayment amount,loan_emi_query,loan_emi_query
+What monthly EMI is being charged on my loan,loan_emi_query,loan_emi_query
+When must I make my home loan repayment,loan_emi_query,loan_emi_query
+Look up the principal left on my current loan,loan_emi_query,loan_emi_query
+Show the payment schedule for the loan on file,loan_emi_query,loan_emi_query
+I would like to start a fresh term deposit,fixed_deposit_booking,fixed_deposit_booking
+Put twenty thousand into a one year FD,fixed_deposit_booking,fixed_deposit_booking
+Can we open a deposit with fixed interest,fixed_deposit_booking,fixed_deposit_booking
+Book a six month FD from my savings,fixed_deposit_booking,fixed_deposit_booking
+Create a new deposit with a fixed maturity,fixed_deposit_booking,fixed_deposit_booking
+I need to start a new FD today,fixed_deposit_booking,fixed_deposit_booking
+Place some money into a term account,fixed_deposit_booking,fixed_deposit_booking
+Set up a twelve month fixed deposit for me,fixed_deposit_booking,fixed_deposit_booking
+How much will I receive when the existing deposit matures,fixed_deposit_enquiry,fixed_deposit_enquiry
+Look up the term deposit I already have,fixed_deposit_enquiry,fixed_deposit_enquiry
+What date is my FD due to mature,fixed_deposit_enquiry,fixed_deposit_enquiry
+Show my current fixed deposit holdings,fixed_deposit_enquiry,fixed_deposit_enquiry
+Can you display the maturity value for my FD,fixed_deposit_enquiry,fixed_deposit_enquiry
+Tell me the remaining term of my fixed deposit,fixed_deposit_enquiry,fixed_deposit_enquiry
+Which term deposits are active in my profile,fixed_deposit_enquiry,fixed_deposit_enquiry
+Check the principal and expiry of my existing FD,fixed_deposit_enquiry,fixed_deposit_enquiry
+Could you pull my latest card billing statement,credit_card_statement_request,credit_card_statement_request
+I need a breakdown of charges on the card,credit_card_statement_request,credit_card_payment_due_enquiry
+Show purchases in my most recent card cycle,credit_card_statement_request,credit_card_statement_request
+Let me see the credit card statement details,credit_card_statement_request,credit_card_statement_request
+Which card purchases made up the latest bill,credit_card_statement_request,credit_card_statement_request
+Get the card bill with the billing period,credit_card_statement_request,credit_card_statement_request
+Find my current credit card statement,credit_card_statement_request,credit_card_statement_request
+Give me the transaction list on my card,credit_card_statement_request,credit_card_statement_request
+How much spending room is available on my card,credit_card_limit_enquiry,credit_card_limit_enquiry
+Show the total and remaining limit on my card,credit_card_limit_enquiry,credit_card_limit_enquiry
+What is the credit line on this card,credit_card_limit_enquiry,credit_card_payment_due_enquiry
+Please tell me my current sanctioned card limit,credit_card_limit_enquiry,credit_card_limit_enquiry
+How much of my credit limit can I use,credit_card_limit_enquiry,credit_card_limit_enquiry
+See how much credit I have left,credit_card_limit_enquiry,credit_card_limit_enquiry
+Where can I check my card reward points,credit_card_limit_enquiry,credit_card_limit_enquiry
+Get my available credit for this card,credit_card_limit_enquiry,credit_card_limit_enquiry
+By which date must I pay the card bill,credit_card_payment_due_enquiry,credit_card_payment_due_enquiry
+What is the least I can pay on the current credit card bill,credit_card_payment_due_enquiry,credit_card_payment_due_enquiry
+Can you find my next card bill deadline,credit_card_payment_due_enquiry,credit_card_payment_due_enquiry
+Check the amount due for the credit card payment,credit_card_payment_due_enquiry,credit_card_payment_due_enquiry
+When is payment expected on this card,credit_card_payment_due_enquiry,credit_card_payment_due_enquiry
+How much of my card statement is due,credit_card_payment_due_enquiry,credit_card_payment_due_enquiry
+Show me the card's minimum payable amount,credit_card_payment_due_enquiry,credit_card_payment_due_enquiry
+What date do I have to settle the card bill,credit_card_payment_due_enquiry,credit_card_payment_due_enquiry
+Can I ask to raise my credit card limit,credit_card_limit_enhancement,credit_card_limit_enhancement
+Submit a request for a larger card credit line,credit_card_limit_enhancement,credit_card_limit_enhancement
+I need more spending limit on this credit card,credit_card_limit_enhancement,credit_card_limit_enhancement
+Would you open a limit increase case,credit_card_limit_enhancement,credit_card_limit_enhancement
+I want to apply to increase my sanctioned credit limit,credit_card_limit_enhancement,credit_card_limit_enhancement
+Raise the limit of my card please,credit_card_limit_enhancement,credit_card_limit_enhancement
+Put in a request for a higher available credit ceiling,credit_card_limit_enhancement,credit_card_limit_enhancement
+I need an enhancement to my credit card limit,credit_card_limit_enhancement,credit_card_limit_enhancement
+Can I flag a debit that I never made,fraud_alert_report,fraud_alert_report
+There is a payment on my account I do not recognise,fraud_alert_report,fraud_alert_report
+Raise a dispute for a potentially fraudulent transfer,fraud_alert_report,fraud_alert_report
+Log a fraud case for a withdrawal I did not authorise,fraud_alert_report,fraud_alert_report
+Please report a suspicious bank charge,fraud_alert_report,fraud_alert_report
+Help me report money taken from my account,fraud_alert_report,fund_transfer_initiation
+This transfer was unauthorised and needs reporting,fraud_alert_report,fund_transfer_initiation
+Flag an unfamiliar payment for investigation,fraud_alert_report,fraud_alert_report
+I misplaced my card and need it frozen,block_card_request,block_card_request
+Stop new payments on my lost credit card,block_card_request,block_card_request
+Can you temporarily lock my card,block_card_request,block_card_request
+Please block my stolen bank card,block_card_request,block_card_request
+My card is missing disable it,block_card_request,block_card_request
+I want to suspend this credit card now,block_card_request,block_card_request
+Freeze the card so it cannot make purchases,block_card_request,block_card_request
+Disable my card because I cannot find it,block_card_request,block_card_request
+I would like to file a complaint about service,grievance_registration,grievance_registration
+Could you lodge a grievance about a fee,grievance_registration,grievance_registration
+Start a service issue ticket for me,grievance_registration,grievance_registration
+My branch service was poor and I want to complain,grievance_registration,grievance_registration
+Register my dissatisfaction with support,grievance_registration,grievance_registration
+Submit a complaint about an incorrect charge,grievance_registration,grievance_registration
+Open a formal service grievance,grievance_registration,grievance_registration
+Please record my complaint about the bank,grievance_registration,grievance_registration
+Can I get an update on my existing ticket,case_status_request,case_status_request
+Look up whether my fraud report is still open,case_status_request,case_status_request
+How far along is my complaint case,case_status_request,case_status_request
+Find the current state of a request I already submitted,case_status_request,case_status_request
+Check the progress of the grievance I raised,case_status_request,case_status_request
+Track the reference from my limit increase ticket,case_status_request,case_status_request
+Has the complaint I filed been reviewed,case_status_request,case_status_request
+See the status of a previous service case,case_status_request,case_status_request
+Hi is the assistant there,greet,greet
+A pleasant good evening to you,greet,greet
+Hello can we begin,greet,greet
+Hey it is good to meet you,greet,greet
+Good morning to the bank assistant,greet,greet
+Hi are you online,greet,greet
+Hello I would like to start,greet,greet
+Greetings to the assistant,greet,greet
+Yes I accept that,affirm,affirm
+I approve this action,affirm,affirm
+Go ahead as shown,affirm,affirm
+Yes that is fine,affirm,affirm
+Please confirm the operation,affirm,affirm
+You can continue now,affirm,goodbye
+I am happy to proceed,affirm,affirm
+That is correct please submit,affirm,affirm
+I would rather stop this,deny,deny
+Please discard what I entered,deny,deny
+Do not complete the operation,deny,deny
+No please back out,deny,deny
+I want to abort this request,deny,deny
+Cancel before you submit it,deny,deny
+I withdraw my confirmation,deny,fixed_deposit_enquiry
+Don't continue with this,deny,affirm
+Bye have a nice day,goodbye,goodbye
+That is all for today farewell,goodbye,goodbye
+I'll talk to you another time,goodbye,goodbye
+Thanks I am signing off,goodbye,goodbye
+See you again soon,goodbye,goodbye
+Goodbye for now assistant,goodbye,goodbye
+I am finished chatting bye,goodbye,goodbye
+Have a pleasant day and bye,goodbye,goodbye
+Show me the football results,out_of_scope,out_of_scope
+Could you book a train ticket,out_of_scope,out_of_scope
+Tell me a funny story about cats,out_of_scope,grievance_registration
+I need the recipe for dal,out_of_scope,transaction_history_request
+What will the temperature be on Sunday,out_of_scope,out_of_scope
+Recommend a travel destination,out_of_scope,out_of_scope
+Please track my online order,out_of_scope,case_status_request
+Find the nearest bakery,out_of_scope,out_of_scope

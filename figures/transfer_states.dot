@@ -1,0 +1,22 @@
+digraph Flow {
+  graph [rankdir=TB bgcolor="white" pad=0.2 nodesep=.3 ranksep=.42 dpi=155]
+  node [shape=box style="rounded,filled" fillcolor="#eff7f4" color="#83b0a8" fontcolor="#17324e" fontname="DejaVu Sans" fontsize=11 margin="0.13,0.08"]
+  edge [color="#49647a" fontname="DejaVu Sans" fontsize=9 arrowsize=.65]
+  Request [label="Transfer request"]
+  Verified [label="Verify demo identity\nOne-time code"]
+  Slots [label="Payee, amount, rail, purpose"]
+  StepUp [label="Re-enter beneficiary suffix"]
+  Review [label="Review and confirm"]
+  Txn [label="Atomic sandbox transfer\nDebit, credit, ledger, audit"]
+  Reject [label="Retry, cancel or return to menu" fillcolor="#fbf3e7" color="#ceaa77"]
+  Request -> Verified
+  Verified -> Slots [label="valid grant"]
+  Verified -> Reject [label="expired or locked"]
+  Slots -> StepUp [label="at least INR 25,000"]
+  Slots -> Review [label="below threshold"]
+  StepUp -> Review [label="match"]
+  Review -> Slots [label="change amount" constraint=false]
+  Review -> Reject [label="cancel or expired"]
+  Review -> Txn [label="explicit confirmation"]
+  Txn -> Reject [label="insufficient at commit"]
+}

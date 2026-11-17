@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: banking-assistant-demo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements-cloud.txt
+    startCommand: python cloud_run.py
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: BANKING_DB_PATH
+        value: /tmp/banking_assistant_demo.sqlite3
+      - key: BANKING_ALLOWED_HOSTS
+        value: banking-assistant-demo.onrender.com,localhost,127.0.0.1

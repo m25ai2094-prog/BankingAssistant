@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+.train-venv/
+.rasa-venv/
+instance/
+*.sqlite
+*.sqlite3
+*.db
+.DS_Store

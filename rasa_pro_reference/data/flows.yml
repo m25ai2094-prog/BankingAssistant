@@ -1,0 +1,40 @@
+flows:
+  transfer_money:
+    description: Help users simulate sending money to friends and family.
+    steps:
+      - collect: recipient
+      - collect: amount
+        description: The number of Indian rupees to send.
+      - action: action_check_transfer
+        next:
+          - if: slots.transfer_status == "invalid"
+            then:
+              - action: utter_invalid_amount
+                next: END
+          - if: slots.transfer_status == "insufficient"
+            then:
+              - action: utter_insufficient_funds
+                next: END
+          - else: confirm_transfer
+      - collect: final_confirmation
+        id: confirm_transfer
+        next:
+          - if: not slots.final_confirmation
+            then:
+              - action: utter_transfer_cancelled
+                next: END
+          - else: check_before_completion
+      - action: action_check_transfer
+        id: check_before_completion
+        next:
+          - if: slots.transfer_status == "valid"
+            then:
+              - action: utter_transfer_complete
+                next: END
+          - if: slots.transfer_status == "insufficient"
+            then:
+              - action: utter_insufficient_funds
+                next: END
+          - else:
+              - action: utter_invalid_amount
+                next: END

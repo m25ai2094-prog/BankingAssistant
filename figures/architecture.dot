@@ -1,0 +1,17 @@
+digraph System {
+  graph [rankdir=TB bgcolor="white" pad=0.2 nodesep=0.38 ranksep=0.47 dpi=165]
+  node [shape=box style="rounded,filled" fillcolor="#eff7f4" color="#83b0a8" fontcolor="#17324e" fontname="DejaVu Sans" margin="0.13,0.10" fontsize=12]
+  edge [color="#49647a" fontcolor="#49647a" fontname="DejaVu Sans" fontsize=9 arrowsize=.65]
+  Browser [label="Browser\nChat, demo inbox, receipts"]
+  Gateway [label="Loopback HTTP gateway\nSession cookie, request IDs, origin checks"]
+  Engine [label="Banking workflow engine\nSlots, verification, review, actions"]
+  NLU [label="Portable intent model\nWord and character TF-IDF"]
+  Rasa [label="Optional Rasa NLU\n/model/parse" style="rounded,dashed,filled"]
+  Store [label="SQLite sandbox\nAccounts, ledger, products, cases, audit"]
+  Browser -> Gateway [label="JSON turn" dir=both]
+  Gateway -> Engine [label="scoped session" dir=both]
+  Engine -> NLU [label="redacted opening text"]
+  Engine -> Rasa [label="optional connector" style=dashed]
+  Engine -> Store [label="owned reads and atomic writes" dir=both]
+  {rank=same; NLU Rasa Store}
+}

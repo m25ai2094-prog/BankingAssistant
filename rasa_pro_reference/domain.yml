@@ -1,0 +1,63 @@
+version: "3.1"
+actions:
+  - action_check_transfer
+slots:
+  recipient:
+    type: text
+    mappings:
+      - type: from_llm
+  amount:
+    type: float
+    mappings:
+      - type: from_llm
+  final_confirmation:
+    type: bool
+    mappings:
+      - type: from_llm
+  transfer_status:
+    type: categorical
+    values:
+      - valid
+      - invalid
+      - insufficient
+    mappings:
+      - type: controlled
+responses:
+  utter_ask_recipient:
+    - text: "Who would you like to send money to?"
+  utter_ask_amount:
+    - text: "How much would you like to send in Indian rupees?"
+  utter_ask_final_confirmation:
+    - text: >-
+        Please confirm: simulate sending INR {amount} to
+        {recipient}? Reply Yes or No.
+  utter_transfer_complete:
+    - text: >-
+        Demo transfer completed: INR {amount} to {recipient}.
+        No real money was moved.
+  utter_transfer_cancelled:
+    - text: "Transfer cancelled. No money was moved."
+  utter_invalid_amount:
+    - text: >-
+        Invalid amount. Please start a new transfer with an amount
+        greater than zero and no more than two decimal places.
+  utter_insufficient_funds:
+    - text: >-
+        Insufficient demo balance. Your requested amount is INR
+        {amount}, but the fictional balance is INR 1000.
+        No transfer was completed.
+  utter_free_chitchat_response:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with a banking
+          demonstration assistant.
+          The assistant helps users simulate money transfers.
+          All transactions are fictional. No real money moves.
+          Respond briefly and politely to small talk.
+          Do not claim to have performed a banking operation.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
